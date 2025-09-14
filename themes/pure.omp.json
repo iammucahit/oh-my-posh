@@ -5,12 +5,6 @@
       "alignment": "left",
       "segments": [
         {
-          "foreground": "#BF616A",
-          "style": "plain",
-          "template": "{{ .UserName }} ",
-          "type": "session"
-        },
-        {
           "foreground": "#81A1C1",
           "properties": {
             "style": "full"
@@ -36,7 +30,7 @@
             "github_icon": ""
           },
           "style": "plain",
-          "template": "{{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }}<#FFAFD7>*</>{{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }} \ueb4b {{ .StashCount }}{{ end }} ",
+          "template": "{{ .HEAD }}{{ if or (.Working.Changed) (.Staging.Changed) }}*{{ end }} <cyan>{{ if gt .Behind 0 }}⇣{{ end }}{{ if gt .Ahead 0 }}⇡{{ end }}</>",
           "type": "git"
         }
       ],
@@ -77,7 +71,7 @@
       "type": "prompt"
     }
   ],
-  "console_title_template": "{{if .Root}}(Admin){{end}} {{.PWD}}",
+  "console_title_template": "{{if .Root}}(Admin){{end}} {{.PWD}}", 
   "transient_prompt": {
     "foreground": "#B48EAD",
     "foreground_templates": [
